@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "Othello/Othello.h"
+#include "Othello/Model/Othello.h"
 
 int main() {
 	using namespace std;

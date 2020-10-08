@@ -18,21 +18,24 @@
     <ClCompile Include="Othello_CLI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Othello\Othello.cpp">
+    <ClCompile Include="Othello\Model\Othello.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Othello\Point.h">
+    <ClInclude Include="Othello\Model\DirVector.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Othello\DirVector.hpp">
+    <ClInclude Include="Othello\Model\Othello.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Othello\Othello.h">
+    <ClInclude Include="Othello\Model\Point.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Othello\Team.hpp">
+    <ClInclude Include="Othello\Model\Team.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Othello\IAgentStrategy.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
