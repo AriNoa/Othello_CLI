@@ -1,10 +1,10 @@
 #pragma once
-#include "Othello.h"
+#include "Model/Othello.h"
 
 using namespace otl;
 
 class IAgentStrategy {
-	virtual ~IAgentStrategy() = 0;
+	virtual ~IAgentStrategy() {};
 
 	virtual Point answer(const Othello& othello) = 0;
 };
