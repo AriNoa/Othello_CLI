@@ -43,21 +43,21 @@ int main() {
 
         Point putPos;
 
-        do {
-            if (!flag_of_bot) {
+        if (!flag_of_bot) {
+            do {
                 cout << endl << "入力してください！" << endl;
                 cout << "X << ";
                 cin >> putPos.x;
                 cout << "Y << ";
                 cin >> putPos.y;
-            }
-            else {
-                cout << endl << "Bot..." << endl;
-                putPos = randomBot->answer(othello);
-                cout << "X << " << putPos.x << endl;
-                cout << "Y << " << putPos.y << endl;
-            }
-        } while (!othello.canPutStone(putPos));
+            } while (!othello.canPutStone(putPos));
+        }
+        else {
+            cout << endl << "Bot..." << endl;
+            putPos = randomBot->answer(othello);
+            cout << "X << " << putPos.x << endl;
+            cout << "Y << " << putPos.y << endl;;
+        }
 
         flag_of_bot = !flag_of_bot;
 
