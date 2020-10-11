@@ -18,17 +18,17 @@ namespace otl {
 			return "与えられた位置には既に石が置かれています";
 		}
 
-		if (!canPutStone(point)) {
+		if (!canTurnOverStone(point)) {
 			return "与えられた位置に石を置いても石を返すことはできません";
 		}
 
 		updateBoard(point, activeTeam);
 
 		activeTeam = getEnemyTeam(activeTeam);
-		if (canPutStones()) return std::pair(board, activeTeam);
+		if (canTurnOverStones()) return std::pair(board, activeTeam);
 
 		activeTeam = getEnemyTeam(activeTeam);
-		if (canPutStones()) return std::pair(board, activeTeam);
+		if (canTurnOverStones()) return std::pair(board, activeTeam);
 
 		return std::pair(board, Team::None);
 	}
@@ -52,7 +52,7 @@ namespace otl {
 		throw "ここが実行されたら実装が間違ってる";
 	}
 
-	bool Othello::canPutStone(const Point& point) const {
+	bool Othello::canTurnOverStone(const Point& point) const {
 		const std::vector<DirVector> dirVecs = {
 			{ -1, -1 },	{ 0, -1 },	{ 1, -1 },
 			{ -1, 0  },				{ 1, 0  },
@@ -66,14 +66,24 @@ namespace otl {
 		return false;
 	}
 
-	bool Othello::canPutStones() const {
+	bool Othello::canTurnOverStones() const {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (canPutStone(Point{ x, y })) return true;
+				if (canTurnOverStone(Point{ x, y })) return true;
 			}
 		}
 
 		return false;
+	}
+
+	bool Othello::canPutStone(const Point& point) const {
+		if (!PointIsInBoard(point)) return false;
+
+		if (board[point.y][point.x] != Team::None) return false;
+
+		if (!canTurnOverStone(point)) return false;
+
+		return true;
 	}
 
 
