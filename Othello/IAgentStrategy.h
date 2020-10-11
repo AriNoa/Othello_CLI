@@ -4,7 +4,8 @@
 using namespace otl;
 
 class IAgentStrategy {
+public:
 	virtual ~IAgentStrategy() {};
 
-	virtual Point answer(const Othello& othello) = 0;
+	virtual otl::Point answer(const otl::Othello& othello) = 0;
 };
