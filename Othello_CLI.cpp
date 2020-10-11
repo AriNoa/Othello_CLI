@@ -1,14 +1,19 @@
 ﻿#include <iostream>
 #include "Othello/Model/Othello.h"
+#include "Othello/IAgentStrategy.h"
+#include "Othello/RandomBot.h"
+
 
 int main() {
 	using namespace std;
 	using namespace otl;
-	cout << endl;
+	cout << endl;	
 	cout << "Othello_CLI";
 	cout << endl;
 
 	Othello othello;
+	//RandomBot randomBot;
+	IAgentStrategy *randomBot = new RandomBot();
 	
 
 	do {
@@ -39,11 +44,22 @@ int main() {
 		Point putPos;
 
 		do {
-			cout << endl << "Input..." << endl;
-			cout << "X << ";
-			cin >> putPos.x;
-			cout << "Y << ";
-			cin >> putPos.y;
+
+			int i = 0;
+			if (i == 1) {
+				putPos = randomBot->answer(othello);
+				i = 0;
+			}
+
+			if (i == 0) {
+				cout << endl << "Input..." << endl;
+				cout << "X << ";
+				cin >> putPos.x;
+				cout << "Y << ";
+				cin >> putPos.y;
+
+				i = 1;
+			}
 		} while (!othello.canPutStone(putPos));
 
 		auto res = othello.putStone(putPos);
@@ -54,5 +70,6 @@ int main() {
 		}
 	} while (othello.getActiveTeam() != Team::None);
 
+	delete randomBot;
 	return 0;
 }

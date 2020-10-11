@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Othello\Model\Othello.cpp" />
+    <ClCompile Include="Othello\RandomBot.cpp" />
     <ClCompile Include="Othello_CLI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <ClInclude Include="Othello\Model\DirVector.hpp" />
     <ClInclude Include="Othello\Model\Point.h" />
     <ClInclude Include="Othello\Model\Team.hpp" />
+    <ClInclude Include="Othello\RandomBot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
