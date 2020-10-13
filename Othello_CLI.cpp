@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <memory>
 #include "Othello/Model/Othello.h"
 #include "Othello/IAgentStrategy.h"
 #include "Othello/RandomBot.h"
@@ -12,7 +13,7 @@ int main() {
     cout << endl;
 
     Othello othello;
-    IAgentStrategy* randomBot = new RandomBot();
+    unique_ptr<IAgentStrategy> randomBot(new RandomBot());
 
     bool flag_of_bot = false;
 
@@ -56,7 +57,7 @@ int main() {
             cout << endl << "Bot..." << endl;
             putPos = randomBot->answer(othello);
             cout << "X << " << putPos.x << endl;
-            cout << "Y << " << putPos.y << endl;;
+            cout << "Y << " << putPos.y << endl;
         }
 
         flag_of_bot = !flag_of_bot;
@@ -69,6 +70,5 @@ int main() {
         }
     } while (othello.getActiveTeam() != Team::None);
 
-    delete randomBot;
     return 0;
 }

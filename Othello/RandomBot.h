@@ -1,11 +1,12 @@
 #pragma once
 #include <random>
-#include <vector>
-#include "Model/Point.h"
+#include "Model/Othello.h"
 #include "IAgentStrategy.h"
+
+using namespace std;
+
 
 class RandomBot : public IAgentStrategy {
 public:
-	virtual ~RandomBot() {}
 	virtual Point answer(const Othello& othello) override;
 };
