@@ -5,9 +5,29 @@
 #include "Othello/RandomBot.h"
 
 
+void drawBoard(vector<vector<Team>> board) {
+    for (int y = 0; y < Othello::height; y++) {
+        for (int x = 0; x < Othello::width; x++) {
+            switch (board[y][x]) {
+            case Team::None:
+                cout << "□";
+                break;
+
+            case Team::First:
+                cout << "○";
+                break;
+
+            case Team::Second:
+                cout << "●";
+                break;
+            }
+        }
+        cout << endl;
+    }
+}
+
+
 int main() {
-    using namespace std;
-    using namespace otl;
     cout << endl;
     cout << "Othello_CLI";
     cout << endl;
@@ -15,36 +35,17 @@ int main() {
     Othello othello;
     unique_ptr<IAgentStrategy> randomBot(new RandomBot());
 
-    bool flag_of_bot = false;
+    drawBoard(othello.getBoard());
 
-    do {
-        for (int y = 0; y < Othello::height; y++) {
-            for (int x = 0; x < Othello::width; x++) {
-                switch (othello.getBoard()[y][x]) {
-                case Team::None:
-                    cout << "□";
-                    break;
+    while (true) {
+        Team activeTeam = othello.getActiveTeam();
+        if (activeTeam == Team::None) break;
 
-                case Team::First:
-                    cout << "○";
-                    break;
-
-                case Team::Second:
-                    cout << "●";
-                    break;
-                }
-            }
-            cout << endl;
-        }
-
-        map<Team, int> score = othello.getScore();
-        cout << endl << "First: " << score[Team::First];
-        cout << endl << "Second: " << score[Team::Second];
-        cout << endl << "Active team: " << size_t(othello.getActiveTeam()) << endl;
 
         Point putPos;
 
-        if (!flag_of_bot) {
+
+        if (activeTeam == Team::First) {
             do {
                 cout << endl << "入力してください！" << endl;
                 cout << "X << ";
@@ -52,23 +53,28 @@ int main() {
                 cout << "Y << ";
                 cin >> putPos.y;
             } while (!othello.canPutStone(putPos));
-        }
-        else {
+        } else {
             cout << endl << "Bot..." << endl;
             putPos = randomBot->answer(othello);
             cout << "X << " << putPos.x << endl;
             cout << "Y << " << putPos.y << endl;
         }
 
-        flag_of_bot = !flag_of_bot;
+        auto putResult = othello.putStone(putPos);
 
-        auto res = othello.putStone(putPos);
-
-        if (holds_alternative<string>(res)) {
-            cout << get<string>(res) << endl;
+        if (holds_alternative<string>(putResult)) {
+            cout << get<string>(putResult) << endl;
             return 1;
         }
-    } while (othello.getActiveTeam() != Team::None);
+
+        map<Team, int> score = othello.getScore();
+        cout << endl
+            << "FirstStone: " << score[Team::First] << endl
+            << "SecondStone: " << score[Team::Second] << endl;
+
+        auto board = get<std::pair<std::vector<std::vector<Team>>, Team>>(putResult).first;
+        drawBoard(board);
+    }
 
     return 0;
 }
