@@ -5,8 +5,9 @@
 Point ManualStrategy::answer(const Othello& othello) {
     using namespace std;
     Point putPos;
+
     do {
-        cout << endl << "“ü—Í‚µ‚Ä‚­‚¾‚³‚¢I" << endl;
+        cout << "Please enter the answer." << endl;
         cout << "X << ";
         cin >> putPos.x;
         cout << "Y << ";

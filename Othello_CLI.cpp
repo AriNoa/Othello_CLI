@@ -28,6 +28,13 @@ void drawBoard(const std::vector<std::vector<Team>> board) {
 }
 
 
+void printLine() {
+    std::cout << std::endl;
+    for (int i = 0; i < 16; i++) { std::cout << '-'; }
+    std::cout << std::endl;
+}
+
+
 int main() {
     using namespace std;
 
@@ -45,28 +52,37 @@ int main() {
         { Team::Second, randomAgent }
     };
 
-    drawBoard(othello.getBoard());
-
     while (true) {
+        printLine();
+
+        drawBoard(othello.getBoard());
+
+        map<Team, int> score = othello.getScore();
+
+        cout << endl;
+        auto printScore = [&agents, &score](Team t){
+            cout << agents[t]->getName() << " : " << score[t] << endl;
+        };
+        printScore(Team::First);
+        printScore(Team::Second);
+
+        printLine();
+
         const Team activeTeam = othello.getActiveTeam();
         if (activeTeam == Team::None) break;
 
         const Point putPos = agents[activeTeam]->answer(othello);
+        cout << endl 
+            << agents[activeTeam]->getName() << endl
+            << "  X: " << putPos.x << endl
+            << "  Y: " << putPos.y << endl;
 
         auto putResult = othello.putStone(putPos);
 
         if (holds_alternative<string>(putResult)) {
-            cout << get<string>(putResult) << endl;
+            cout << endl << get<string>(putResult) << endl;
             return 1;
         }
-
-        map<Team, int> score = othello.getScore();
-        cout << endl
-            << "FirstStone: " << score[Team::First] << endl
-            << "SecondStone: " << score[Team::Second] << endl;
-
-        auto board = get<std::pair<std::vector<std::vector<Team>>, Team>>(putResult).first;
-        drawBoard(board);
     }
 
     return 0;
