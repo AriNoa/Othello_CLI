@@ -4,24 +4,31 @@
 #include "Othello/RandomBot.h"
 
 
+std::string getStoneStr(const Team& team) {
+    switch (team) {
+    case Team::None:
+        return "□";
+
+    case Team::First:
+        return "○";
+
+    case Team::Second:
+        return "●";
+    }
+
+    return "X";
+}
+
 void drawBoard(const std::vector<std::vector<Team>> board) {
     using namespace std;
 
+    for (int x = 0; x < Othello::width; x++) { cout << ' ' << x; }
+    cout << endl;
+
     for (int y = 0; y < Othello::height; y++) {
+        cout << y;
         for (int x = 0; x < Othello::width; x++) {
-            switch (board[y][x]) {
-            case Team::None:
-                cout << "□";
-                break;
-
-            case Team::First:
-                cout << "○";
-                break;
-
-            case Team::Second:
-                cout << "●";
-                break;
-            }
+            cout << getStoneStr(board[y][x]);
         }
         cout << endl;
     }
@@ -61,7 +68,7 @@ int main() {
 
         cout << endl;
         auto printScore = [&agents, &score](Team t){
-            cout << agents[t]->getName() << " : " << score[t] << endl;
+            cout << agents[t]->getName() << getStoneStr(t) << " : " << score[t] << endl;
         };
         printScore(Team::First);
         printScore(Team::Second);
@@ -71,9 +78,9 @@ int main() {
         const Team activeTeam = othello.getActiveTeam();
         if (activeTeam == Team::None) break;
 
+        cout << endl << agents[activeTeam]->getName() << getStoneStr(activeTeam) << endl;
         const Point putPos = agents[activeTeam]->answer(othello);
-        cout << endl 
-            << agents[activeTeam]->getName() << endl
+        cout << "Answer" << endl
             << "  X: " << putPos.x << endl
             << "  Y: " << putPos.y << endl;
 

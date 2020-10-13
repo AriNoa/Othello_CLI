@@ -1,4 +1,5 @@
 #include "Othello.h"
+#include <iostream>
 
 
 namespace otl {
@@ -25,12 +26,13 @@ namespace otl {
 		updateBoard(point, activeTeam);
 
 		activeTeam = getEnemyTeam(activeTeam);
-		if (canTurnOverStones()) return std::pair(board, activeTeam);
+		if (canPutStones()) return std::pair(board, activeTeam);
 
 		activeTeam = getEnemyTeam(activeTeam);
-		if (canTurnOverStones()) return std::pair(board, activeTeam);
+		if (canPutStones()) return std::pair(board, activeTeam);
 
-		return std::pair(board, Team::None);
+		activeTeam = Team::None;
+		return std::pair(board, activeTeam);
 	}
 
 
@@ -48,8 +50,6 @@ namespace otl {
 
 			hasEnemyStone = true;
 		}
-
-		throw "‚±‚±‚ªÀs‚³‚ê‚½‚çÀ‘•‚ªŠÔˆá‚Á‚Ä‚é";
 	}
 
 	bool Othello::canTurnOverStone(const Point& point) const {
@@ -66,16 +66,6 @@ namespace otl {
 		return false;
 	}
 
-	bool Othello::canTurnOverStones() const {
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				if (canTurnOverStone(Point{ x, y })) return true;
-			}
-		}
-
-		return false;
-	}
-
 	bool Othello::canPutStone(const Point& point) const {
 		if (!PointIsInBoard(point)) return false;
 
@@ -84,6 +74,16 @@ namespace otl {
 		if (!canTurnOverStone(point)) return false;
 
 		return true;
+	}
+
+	bool Othello::canPutStones() const {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (canPutStone(Point{ x, y })) return true;
+			}
+		}
+
+		return false;
 	}
 
 

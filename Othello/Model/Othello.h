@@ -60,8 +60,8 @@ namespace otl {
 
 		bool canTurnOverLine(const Point& point, const DirVector& dvec) const;
 		bool canTurnOverStone(const Point& point) const;
-		bool canTurnOverStones() const;
 		bool canPutStone(const Point& point) const;
+		bool canPutStones() const;
 
 		void updateBoard(const Point& updatePos, const Team& team);
 	};
