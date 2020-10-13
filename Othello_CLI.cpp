@@ -1,11 +1,12 @@
 ﻿#include <iostream>
 #include <memory>
-#include "Othello/Model/Othello.h"
-#include "Othello/IAgentStrategy.h"
+#include "Othello/ManualStrategy.h"
 #include "Othello/RandomBot.h"
 
 
-void drawBoard(vector<vector<Team>> board) {
+void drawBoard(const std::vector<std::vector<Team>> board) {
+    using namespace std;
+
     for (int y = 0; y < Othello::height; y++) {
         for (int x = 0; x < Othello::width; x++) {
             switch (board[y][x]) {
@@ -28,37 +29,29 @@ void drawBoard(vector<vector<Team>> board) {
 
 
 int main() {
+    using namespace std;
+
+
     cout << endl;
     cout << "Othello_CLI";
     cout << endl;
 
     Othello othello;
-    unique_ptr<IAgentStrategy> randomBot(new RandomBot());
+
+    shared_ptr<IAgentStrategy> manualAgent(new ManualStrategy());
+    shared_ptr<IAgentStrategy> randomAgent(new RandomBot());
+    map<Team, shared_ptr<IAgentStrategy>> agents = {
+        { Team::First,  manualAgent },
+        { Team::Second, randomAgent }
+    };
 
     drawBoard(othello.getBoard());
 
     while (true) {
-        Team activeTeam = othello.getActiveTeam();
+        const Team activeTeam = othello.getActiveTeam();
         if (activeTeam == Team::None) break;
 
-
-        Point putPos;
-
-
-        if (activeTeam == Team::First) {
-            do {
-                cout << endl << "入力してください！" << endl;
-                cout << "X << ";
-                cin >> putPos.x;
-                cout << "Y << ";
-                cin >> putPos.y;
-            } while (!othello.canPutStone(putPos));
-        } else {
-            cout << endl << "Bot..." << endl;
-            putPos = randomBot->answer(othello);
-            cout << "X << " << putPos.x << endl;
-            cout << "Y << " << putPos.y << endl;
-        }
+        const Point putPos = agents[activeTeam]->answer(othello);
 
         auto putResult = othello.putStone(putPos);
 
