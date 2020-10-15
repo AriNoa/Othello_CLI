@@ -2,6 +2,7 @@
 #include <memory>
 #include "Othello/ManualStrategy.h"
 #include "Othello/RandomBot.h"
+#include "Othello/ScoreBot.h"
 
 
 std::string getStoneStr(const Team& team) {
@@ -52,10 +53,10 @@ int main() {
 
     Othello othello;
 
-    shared_ptr<IAgentStrategy> manualAgent(new ManualStrategy());
+    shared_ptr<IAgentStrategy> scoreAgent(new ScoreBot());
     shared_ptr<IAgentStrategy> randomAgent(new RandomBot());
     map<Team, shared_ptr<IAgentStrategy>> agents = {
-        { Team::First,  manualAgent },
+        { Team::First,  scoreAgent },
         { Team::Second, randomAgent }
     };
 

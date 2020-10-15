@@ -163,6 +163,7 @@
     <ClCompile Include="Othello\ManualStrategy.cpp" />
     <ClCompile Include="Othello\Model\Othello.cpp" />
     <ClCompile Include="Othello\RandomBot.cpp" />
+    <ClCompile Include="Othello\ScoreBot.cpp" />
     <ClCompile Include="Othello_CLI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@
     <ClInclude Include="Othello\Model\Point.h" />
     <ClInclude Include="Othello\Model\Team.hpp" />
     <ClInclude Include="Othello\RandomBot.h" />
+    <ClInclude Include="Othello\ScoreBot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
