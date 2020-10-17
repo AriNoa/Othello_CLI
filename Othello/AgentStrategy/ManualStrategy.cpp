@@ -2,8 +2,10 @@
 #include "ManualStrategy.h"
 
 
-Point ManualStrategy::answer(const Othello& othello) {
+otl::Point ManualStrategy::answer(const otl::Othello& othello) {
     using namespace std;
+    using namespace otl;
+
     Point putPos;
 
     do {

@@ -7,5 +7,5 @@
 class ManualStrategy : public IAgentStrategy {
 public:
 	virtual std::string getName() const { return "Manual"; }
-	virtual Point answer(const Othello& othello) override;
+	virtual otl::Point answer(const otl::Othello& othello) override;
 };

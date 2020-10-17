@@ -1,7 +1,9 @@
 #include "ScoreBot.h"
 
-Point ScoreBot::answer(const Othello& othello)
-{
+otl::Point ScoreBot::answer(const otl::Othello& othello) {
+	using namespace otl;
+
+
 	std::vector<Point> canPutPoints;
 	int maxScore = -1;
 
@@ -22,7 +24,7 @@ Point ScoreBot::answer(const Othello& othello)
 
 	std::random_device rnd;
 	std::mt19937 mt(rnd());
-	std::uniform_int_distribution<> randSelect(0, canPutPoints.size() - 1);
+	std::uniform_int_distribution<> randSelect(0, (int)canPutPoints.size() - 1);
 	const int randIndex = randSelect(mt);
 
 	return canPutPoints[randIndex];

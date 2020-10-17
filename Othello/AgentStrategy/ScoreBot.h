@@ -17,5 +17,5 @@ class ScoreBot : public IAgentStrategy {
 
 public:
 	virtual std::string getName() const { return "ScoreBot"; }
-	virtual Point answer(const Othello& othello) override;
+	virtual otl::Point answer(const otl::Othello& othello) override;
 };

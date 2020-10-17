@@ -5,7 +5,9 @@
 #include "Othello/AgentStrategy/ScoreBot.h"
 
 
-std::string getStoneStr(const Team& team) {
+std::string getStoneStr(const otl::Team& team) {
+    using namespace otl;
+
     switch (team) {
     case Team::None:
         return "□";
@@ -20,8 +22,9 @@ std::string getStoneStr(const Team& team) {
     return "X";
 }
 
-void drawBoard(const std::vector<std::vector<Team>> board) {
+void drawBoard(const std::vector<std::vector<otl::Team>> board) {
     using namespace std;
+    using namespace otl;
 
     for (int x = 0; x < Othello::width; x++) { cout << ' ' << x; }
     cout << endl;
@@ -45,6 +48,7 @@ void printLine() {
 
 int main() {
     using namespace std;
+    using namespace otl;
 
 
     cout << endl;

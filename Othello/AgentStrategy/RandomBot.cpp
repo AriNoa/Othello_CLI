@@ -1,7 +1,8 @@
 #include "RandomBot.h"
 
 
-Point RandomBot::answer(const Othello& othello) {
+otl::Point RandomBot::answer(const otl::Othello& othello) {
+	using namespace otl;
 	std::vector<Point> canPutPoints;
 	
 	for (int y = 0; y < Othello::height; y++) {

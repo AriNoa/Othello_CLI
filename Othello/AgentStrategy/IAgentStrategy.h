@@ -1,7 +1,6 @@
 #pragma once
 #include <Othello/Model/Othello.h>
 
-using namespace otl;
 
 class IAgentStrategy {
 public:
