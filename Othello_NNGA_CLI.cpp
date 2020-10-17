@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 #include <memory>
-#include "Othello/ManualStrategy.h"
-#include "Othello/RandomBot.h"
-#include "Othello/ScoreBot.h"
+#include "Othello/AgentStrategy/ManualStrategy.h"
+#include "Othello/AgentStrategy/RandomBot.h"
+#include "Othello/AgentStrategy/ScoreBot.h"
 
 
 std::string getStoneStr(const Team& team) {
@@ -68,7 +68,7 @@ int main() {
         map<Team, int> score = othello.getScore();
 
         cout << endl;
-        auto printScore = [&agents, &score](Team t){
+        auto printScore = [&agents, &score](Team t) {
             cout << agents[t]->getName() << getStoneStr(t) << " : " << score[t] << endl;
         };
         printScore(Team::First);

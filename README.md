@@ -1,1 +1,1 @@
-# Othello_CLI
+# Othello_NNGA_CLI

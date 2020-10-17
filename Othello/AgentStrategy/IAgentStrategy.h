@@ -1,5 +1,5 @@
 #pragma once
-#include "Model/Othello.h"
+#include <Othello/Model/Othello.h>
 
 using namespace otl;
 
