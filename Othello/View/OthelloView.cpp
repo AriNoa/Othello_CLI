@@ -79,6 +79,24 @@ void OthelloView::drawTeamScore(const otl::Team& team, const int& score) {
 }
 
 
+void OthelloView::drawAnswer(const otl::Point& pos) {
+    using namespace std;
+
+    cout 
+        << "Answer" << endl
+        << "  X: " << pos.x << endl
+        << "  Y: " << pos.y << endl;
+}
+
+void OthelloView::drawException(std::string result) {
+    using namespace std;
+
+    cout
+        << endl 
+        << result
+        << endl;
+}
+
 void OthelloView::drawOthello(const otl::Othello& othello) {
     using namespace std;
     using namespace otl;

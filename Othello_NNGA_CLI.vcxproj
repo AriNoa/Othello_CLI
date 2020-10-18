@@ -143,7 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="OthelloController.cpp" />
+    <ClCompile Include="Othello\Controller\OthelloController.cpp" />
     <ClCompile Include="Othello\View\OthelloView.cpp" />
     <ClCompile Include="Othello\AgentStrategy\ManualStrategy.cpp" />
     <ClCompile Include="Othello\AgentStrategy\RandomBot.cpp" />
@@ -159,7 +159,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OthelloController.h" />
+    <ClInclude Include="Othello\Controller\OthelloController.h" />
     <ClInclude Include="Othello\View\OthelloView.h" />
     <ClInclude Include="Othello\AgentStrategy\IAgentStrategy.h" />
     <ClInclude Include="Othello\AgentStrategy\ManualStrategy.h" />
