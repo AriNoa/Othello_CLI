@@ -75,7 +75,7 @@ void OthelloView::drawTeamScore(const otl::Team& team, const int& score) {
     string stone = getStoneStr(team);
     string teamName = _teamNames[team];
 
-    cout << stone << teamName << " : " << score << endl;
+    cout << teamName << stone << " : " << score << endl;
 }
 
 
@@ -117,7 +117,7 @@ void OthelloView::drawOthello(const otl::Othello& othello) {
         string teamStr = teamToString(activeTeam);
         cout
             << endl
-            << "The next player is " << stone << teamStr
+            << "Next Player : " << teamStr <<  stone
             << endl;
     }
 
