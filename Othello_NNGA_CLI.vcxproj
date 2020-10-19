@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NN\Neuron.cpp" />
     <ClCompile Include="Othello\Controller\OthelloController.cpp" />
     <ClCompile Include="Othello\View\OthelloView.cpp" />
     <ClCompile Include="Othello\AgentStrategy\ManualStrategy.cpp" />
@@ -159,6 +160,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NN\Neuron.h" />
     <ClInclude Include="Othello\Controller\OthelloController.h" />
     <ClInclude Include="Othello\View\OthelloView.h" />
     <ClInclude Include="Othello\AgentStrategy\IAgentStrategy.h" />
