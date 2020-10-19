@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NN\NeuralNetwork.cpp" />
     <ClCompile Include="NN\Neuron.cpp" />
     <ClCompile Include="NN\NeuronLayer.cpp" />
     <ClCompile Include="Othello\Controller\OthelloController.cpp" />
@@ -161,6 +162,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NN\NeuralNetwork.h" />
     <ClInclude Include="NN\Neuron.h" />
     <ClInclude Include="NN\NeuronLayer.h" />
     <ClInclude Include="Othello\Controller\OthelloController.h" />
