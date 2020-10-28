@@ -1,37 +1,25 @@
 #include "Neuron.h"
 
-
-Neuron::Neuron(
-	const std::vector<Link>& inputLinks,
-	const double& bias
-) {
-	_inputLinks = inputLinks;
-	_bias = bias;
+Neuron::Neuron(const std::vector<double>& weights, const double& bias)
+	: _weights(weights)
+	, _bias(bias) {
 }
 
 
-void Neuron::forward() {
-    double sum = 0;
-    for(const auto& link : _inputLinks) {
-		const double x = link.Neuron.lock()->output();
-		const double w = link.weight;
-        sum += x*w;
-    }
-	
-	forward(
-		sigmoid(sum + _bias)
-	);
-}
+double Neuron::forward(const std::vector<double>& inputs) const {
+	double dot = 0;
+	for (size_t i = 0; i < inputs.size(); i++) {
+		dot += _weights[i] * inputs[i];
+	}
 
-void Neuron::forward(const double& outputValue) {
-	_outputValue = outputValue;
+	return dot + _bias;
 }
 
 
-const std::vector<Neuron::Link>& Neuron::getLinks() const {
-	return _inputLinks;
+const std::vector<double>& Neuron::weights() const {
+	return _weights;
 }
 
-const double& Neuron::output() const {
-	return _outputValue;
+const double& Neuron::bias() const {
+	return _bias;
 }

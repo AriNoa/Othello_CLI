@@ -4,13 +4,11 @@
 
 class NeuralNetwork {
 private:
-	NeuronLayer _inputLayer;
 	std::vector<NeuronLayer> _layers;
 
 public:
 	NeuralNetwork() = default;
 	NeuralNetwork(const std::vector<NeuronLayer>& layers);
 
-	void forward(std::vector<double> outputs);
-	std::vector<double> output();
+	std::vector<double> forward(const std::vector<double>& inputs) const;
 };

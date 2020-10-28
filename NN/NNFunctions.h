@@ -8,14 +8,12 @@ struct NeuronModel {
 };
 
 
-std::vector<Neuron::Link> createLinks(
-	std::vector<std::shared_ptr<Neuron>> linkedNeurons,
-	std::vector<double> weights
+NeuronLayer createLayer(
+	const std::vector<NeuronModel>& neuronModels,
+	const std::function<double(const double&)>& activation
 );
 
-std::vector<std::shared_ptr<Neuron>> createNeurons(
-	std::vector<NeuronModel> layer,
-	std::vector<std::shared_ptr<Neuron>> linkedNeurons
+NeuralNetwork createNN(
+	const std::vector<std::vector<NeuronModel>>& nn,
+	const std::function<double(const double&)>& activation
 );
-
-NeuralNetwork createNN(const std::vector<std::vector<NeuronModel>>& nn);

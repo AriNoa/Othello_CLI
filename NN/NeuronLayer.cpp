@@ -1,34 +1,27 @@
 #include "NeuronLayer.h"
 
-
-NeuronLayer::NeuronLayer(const std::vector<std::shared_ptr<Neuron>>& neurons) {
+NeuronLayer::NeuronLayer(const std::vector<Neuron>& neurons, const std::function<double(double)>& activation) {
 	_neurons = neurons;
+	_activation = activation;
 }
 
+std::vector<double> NeuronLayer::forward(const std::vector<double>& inputs) const {
+	std::vector<double> outputs;
 
-void NeuronLayer::forward() {
-	for (auto& neuron : _neurons) { neuron->forward(); }
-}
-
-void NeuronLayer::forward(const std::vector<double>& outputs) {
-	for (int i = 0; i < _neurons.size(); i++) {
-		const double output = outputs[i];
-
-		_neurons[i]->forward(output);
+	for (const auto& neuron : _neurons){
+		const double output = neuron.forward(inputs);
+		outputs.push_back(
+			_activation(output)
+		);
 	}
+
+	return outputs;
 }
 
-
-const std::vector<std::shared_ptr<Neuron>>& NeuronLayer::getNeurons() {
+const std::vector<Neuron>& NeuronLayer::neurons() const {
 	return _neurons;
 }
 
-std::vector<double> NeuronLayer::getOutputs() {
-	std::vector<double> outputs;
-
-	for (const auto& neuron : _neurons) {
-		outputs.push_back(neuron->output());
-	}
-	
-	return outputs;
+const std::function<double(double)>& NeuronLayer::activation() const {
+	return _activation;
 }
