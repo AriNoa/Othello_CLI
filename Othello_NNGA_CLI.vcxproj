@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GA\GeneticAlgorithm.cpp" />
     <ClCompile Include="NN\NeuralNetwork.cpp" />
     <ClCompile Include="NN\Neuron.cpp" />
     <ClCompile Include="NN\NeuronLayer.cpp" />
@@ -163,6 +164,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GA\GeneticAlgorithm.h" />
     <ClInclude Include="NN\NeuralNetwork.h" />
     <ClInclude Include="NN\Neuron.h" />
     <ClInclude Include="NN\NeuronLayer.h" />
