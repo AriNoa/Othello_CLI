@@ -1,5 +1,5 @@
 #pragma once
-#include <Othello/Model/Othello.h>
+#include "Othello/Model/Othello.h"
 
 
 class IAgentStrategy {

@@ -1,6 +1,6 @@
 #pragma once
 #include <random>
-#include <Othello/Model/Othello.h>
+#include "Othello/Model/Othello.h"
 #include "IAgentStrategy.h"
 
 class ScoreBot : public IAgentStrategy {
