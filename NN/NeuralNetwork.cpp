@@ -15,3 +15,8 @@ std::vector<double> NeuralNetwork::forward(const std::vector<double>& inputs) co
 
 	return outputs;
 }
+
+
+const std::vector<NeuronLayer>& NeuralNetwork::layers() const {
+	return _layers;
+}

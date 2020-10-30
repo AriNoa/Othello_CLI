@@ -11,4 +11,6 @@ public:
 	NeuralNetwork(const std::vector<NeuronLayer>& layers);
 
 	std::vector<double> forward(const std::vector<double>& inputs) const;
+
+	const std::vector<NeuronLayer>& layers() const;
 };
