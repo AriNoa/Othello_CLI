@@ -95,13 +95,16 @@ GeneticAlgorithm::Genome GeneticAlgorithm::crossing(const Genome& first, const G
 
 	random_device rnd;
 	mt19937 mt(rnd());
-	std::uniform_real_distribution<> rand(0, 1);
+	std::uniform_real_distribution<> rand(-1, 1);
 
 	for (size_t i = 0; i < first.size(); i++) {
 		const double random = rand(mt);
 
+		const double& A = first[i];
+		const double& B = second[i];
+
 		newGenome.push_back(
-			(first[i] - second[i]) * random + second[i]
+			(B - A) * random + B
 		);
 	}
 
