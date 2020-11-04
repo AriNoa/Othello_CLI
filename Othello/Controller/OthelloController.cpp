@@ -12,7 +12,7 @@ OthelloController::OthelloController(const std::map<otl::Team, std::shared_ptr<I
 	_view = OthelloView(teamNames);
 }
 
-void OthelloController::run() {
+std::optional<otl::Othello> OthelloController::run() {
     using namespace std;
     using namespace otl;
 
@@ -20,7 +20,7 @@ void OthelloController::run() {
         _view.drawOthello(_othello);
 
         const Team activeTeam = _othello.getActiveTeam();
-        if (activeTeam == Team::None) return;
+        if (activeTeam == Team::None) return _othello;
 
         const Point putPos = _agents[activeTeam]->answer(_othello);
         _view.drawAnswer(putPos);
@@ -29,7 +29,11 @@ void OthelloController::run() {
 
         if (holds_alternative<string>(putResult)) {
             _view.drawException(get<string>(putResult));
-            return;
+            return nullopt;
         }
     }
+}
+
+const otl::Othello& OthelloController::getOthello() const {
+    return _othello;
 }

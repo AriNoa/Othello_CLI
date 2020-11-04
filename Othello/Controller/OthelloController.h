@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <optional>
 #include "Othello/View/OthelloView.h"
 #include "Othello/AgentStrategy/IAgentStrategy.h"
 
@@ -13,5 +14,7 @@ public:
 	OthelloController() = default;
 	OthelloController(const std::map<otl::Team, std::shared_ptr<IAgentStrategy>> agents);
 
-	void run();
+	std::optional<otl::Othello> run();
+	
+	const otl::Othello& getOthello() const;
 };
