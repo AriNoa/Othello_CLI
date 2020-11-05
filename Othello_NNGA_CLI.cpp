@@ -86,8 +86,10 @@ int main() {
 					auto putResult = othello.putStone(putPos);
 
 					if (holds_alternative<string>(putResult)) {
+						cout << endl << putPos.x << ", " << putPos.y;
 						cout << endl << get<string>(putResult) << endl;
-						return 1;
+						//return 1;
+						break;
 					}
 				}
 
