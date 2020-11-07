@@ -10,13 +10,14 @@ public:
     OthelloView() = default;
     OthelloView(const std::map<otl::Team, std::string>& teamNames);
 
-    void printLine();
-    std::string teamToString(const otl::Team& team);
-    std::string getStoneStr(const otl::Team& team);
-    void drawBoard(const otl::Othello& othello);
-    void drawTeamScore(const otl::Team& team, const int& score);
+    static void printLine();
+    static std::string teamToString(const otl::Team& team);
+    static std::string getStoneStr(const otl::Team& team);
+    static void drawBoard(const otl::Othello& othello);
 
-    void drawAnswer(const otl::Point& pos);
-    void drawException(std::string result);
+    static void drawAnswer(const otl::Point& pos);
+    static void drawException(std::string result);
+
+    void drawTeamScore(const otl::Team& team, const int& score);
     void drawOthello(const otl::Othello& othello);
 };
