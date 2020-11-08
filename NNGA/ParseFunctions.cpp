@@ -1,5 +1,4 @@
 #include "ParseFunctions.h"
-#include <cmath>
 
 
 NeuralNetwork toNN(const std::vector<double>& genome, const size_t& inputSize, const std::vector<size_t>& nnSize) {
@@ -43,6 +42,33 @@ std::vector<double> toGenome(const NeuralNetwork& nn) {
 
 			genome.push_back(neuron.bias());
 		}
+	}
+
+	return genome;
+}
+
+std::string toText(const std::vector<double>& genome) {
+	std::string text;
+
+	for (const auto& gene : genome) {
+		text += std::to_string(gene) + '\n';
+	}
+
+	return text;
+}
+
+std::vector<double> toGenome(const std::string& text) {
+	std::vector<double> genome;
+	std::string buffer;
+
+	for (const auto& c : text) {
+		if (c == '\n') {
+			genome.push_back(std::stod(buffer));
+			buffer = "";
+			continue;
+		}
+
+		buffer.push_back(c);
 	}
 
 	return genome;
