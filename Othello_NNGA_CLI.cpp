@@ -36,6 +36,8 @@ int main() {
     using namespace std;
     using namespace otl;
 
+	cout << "Othello_NNGA_CLI" << endl;
+
     const size_t inputSize = 128;
     const std::vector<size_t> nnSize = { 128, 1 };
 
@@ -107,7 +109,7 @@ int main() {
 			}
 		}
 
-		if (generation % 10 == 0) {
+		if (generation % 1 == 0) {
 			cout << generation << "世代: " << setprecision(4) << evals.back() << endl;
 		}
 

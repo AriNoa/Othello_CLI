@@ -45,6 +45,7 @@ otl::Point NNBot::answer(const otl::Othello& othello) {
 
 			Othello copyOthello = othello;
 
+			copyOthello.putStone(pos);
 			const auto inputs = getInputs(myTeam, copyOthello.getBoard());
 			const double output = _nn.forward(inputs).front();
 
