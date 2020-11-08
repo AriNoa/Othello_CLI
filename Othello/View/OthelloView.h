@@ -13,7 +13,7 @@ public:
     static void printLine();
     static std::string teamToString(const otl::Team& team);
     static std::string getStoneStr(const otl::Team& team);
-    static void drawBoard(const std::vector<std::vector<otl::Team>>& board);
+    static void drawBoard(const otl::Othello& othello);
 
     static void drawAnswer(const otl::Point& pos);
     static void drawException(std::string result);
