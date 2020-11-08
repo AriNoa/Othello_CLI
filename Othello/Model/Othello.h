@@ -54,9 +54,9 @@ namespace otl {
 			std::string
 		> putStone(const Point& point);
 
-		inline std::vector<std::vector<Team>> getBoard() const { return board; }
-		constexpr Team getActiveTeam() const { return activeTeam; }
-		inline std::map<Team, int> getScore() const { return score; }
+		inline const std::vector<std::vector<Team>>& getBoard() const { return board; }
+		constexpr const Team& getActiveTeam() const { return activeTeam; }
+		inline const std::map<Team, int>& getScore() const { return score; }
 
 		bool canTurnOverLine(const Point& point, const DirVector& dvec) const;
 		bool canTurnOverStone(const Point& point) const;
