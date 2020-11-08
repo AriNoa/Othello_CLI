@@ -49,11 +49,9 @@ std::string OthelloView::getStoneStr(const otl::Team& team) {
     return "X";
 }
 
-void OthelloView::drawBoard(const otl::Othello& othello) {
+void OthelloView::drawBoard(const std::vector<std::vector<otl::Team>>& board) {
     using namespace std;
     using namespace otl;
-
-    const vector<std::vector<Team>> board = othello.getBoard();
 
     cout << ' ';
     for (int x = 0; x < Othello::width; x++) { cout << ' ' << x; }
@@ -103,7 +101,7 @@ void OthelloView::drawOthello(const otl::Othello& othello) {
 
     printLine();
 
-    drawBoard(othello);
+    drawBoard(othello.getBoard());
     
     cout << endl;
 
