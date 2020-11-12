@@ -39,9 +39,9 @@ namespace otl {
 		}
 
 	private:
-		std::vector<std::vector<Team>> board;
-		Team activeTeam = Team::First;
-		std::map<Team, int> score = {
+		std::vector<std::vector<Team>> _board;
+		Team _activeTeam = Team::First;
+		std::map<Team, int> _score = {
 			{Team::First,	2},
 			{Team::Second,	2},
 		};
@@ -54,9 +54,9 @@ namespace otl {
 			std::string
 		> putStone(const Point& point);
 
-		inline const std::vector<std::vector<Team>>& getBoard() const { return board; }
-		constexpr const Team& getActiveTeam() const { return activeTeam; }
-		inline const std::map<Team, int>& getScore() const { return score; }
+		inline const std::vector<std::vector<Team>>& getBoard() const { return _board; }
+		constexpr const Team& getActiveTeam() const { return _activeTeam; }
+		inline const std::map<Team, int>& getScore() const { return _score; }
 
 		bool canTurnOverLine(const Point& point, const DirVector& dvec) const;
 		bool canTurnOverStone(const Point& point) const;

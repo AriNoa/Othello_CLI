@@ -4,7 +4,7 @@
 
 namespace otl {
 	Othello::Othello() {
-		board = initialBoard;
+		_board = initialBoard;
 	}
 
 	std::variant<
@@ -15,7 +15,7 @@ namespace otl {
 			return "—^‚¦‚ç‚ê‚½ˆÊ’u‚Í”Õ–Ê‚ÌŠO‚Å‚·";
 		}
 
-		if (board[point.y][point.x] != Team::None) {
+		if (_board[point.y][point.x] != Team::None) {
 			return "—^‚¦‚ç‚ê‚½ˆÊ’u‚É‚ÍŠù‚ÉÎ‚ª’u‚©‚ê‚Ä‚¢‚Ü‚·";
 		}
 
@@ -23,16 +23,16 @@ namespace otl {
 			return "—^‚¦‚ç‚ê‚½ˆÊ’u‚ÉÎ‚ð’u‚¢‚Ä‚àÎ‚ð•Ô‚·‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ";
 		}
 
-		updateBoard(point, activeTeam);
+		updateBoard(point, _activeTeam);
 
-		activeTeam = getEnemyTeam(activeTeam);
-		if (canPutStones()) return std::pair(board, activeTeam);
+		_activeTeam = getEnemyTeam(_activeTeam);
+		if (canPutStones()) return std::pair(_board, _activeTeam);
 
-		activeTeam = getEnemyTeam(activeTeam);
-		if (canPutStones()) return std::pair(board, activeTeam);
+		_activeTeam = getEnemyTeam(_activeTeam);
+		if (canPutStones()) return std::pair(_board, _activeTeam);
 
-		activeTeam = Team::None;
-		return std::pair(board, activeTeam);
+		_activeTeam = Team::None;
+		return std::pair(_board, _activeTeam);
 	}
 
 
@@ -43,10 +43,10 @@ namespace otl {
 		while (true) {
 			pos += dvec;
 			if (!PointIsInBoard(pos)) return false;
-			const Team p_team = board[pos.y][pos.x];
+			const Team p_team = _board[pos.y][pos.x];
 			if (p_team == Team::None) return false;
 
-			if (p_team == activeTeam) return hasEnemyStone;
+			if (p_team == _activeTeam) return hasEnemyStone;
 
 			hasEnemyStone = true;
 		}
@@ -69,7 +69,7 @@ namespace otl {
 	bool Othello::canPutStone(const Point& point) const {
 		if (!PointIsInBoard(point)) return false;
 
-		if (board[point.y][point.x] != Team::None) return false;
+		if (_board[point.y][point.x] != Team::None) return false;
 
 		if (!canTurnOverStone(point)) return false;
 
@@ -88,8 +88,8 @@ namespace otl {
 
 
 	void Othello::updateBoard(const Point& updatePos, const Team& team) {
-		board[updatePos.y][updatePos.x] = team;
-		score[team] += 1;
+		_board[updatePos.y][updatePos.x] = team;
+		_score[team] += 1;
 
 		const std::vector<DirVector> dirVecs = {
 			{ -1, -1 },	{ 0, -1 },	{ 1, -1 },
@@ -104,14 +104,14 @@ namespace otl {
 			Point pos = updatePos;
 			while (true) {
 				pos += dirVec;
-				Team p_team = board[pos.y][pos.x];
+				Team p_team = _board[pos.y][pos.x];
 
 				if (p_team == Team::None) break;
 				if (p_team == team) break;
 
-				board[pos.y][pos.x] = team;
-				score[team] += 1;
-				score[getEnemyTeam(team)] -= 1;
+				_board[pos.y][pos.x] = team;
+				_score[team] += 1;
+				_score[getEnemyTeam(team)] -= 1;
 			}
 		}
 	}
