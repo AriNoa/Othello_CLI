@@ -7,7 +7,7 @@
 #include "Othello/AgentStrategy/NNBot.h"
 #include "Othello/AgentStrategy/ManualStrategy.h"
 #include "GA/GeneticAlgorithm.h"
-#include "NNGA/ParseFunctions.h"
+#include "NE/ParseFunctions.h"
 
 
 std::vector<double> createGenome(
@@ -38,7 +38,7 @@ int main() {
     using namespace std;
     using namespace otl;
 
-	cout << "Othello_NNGA_CLI" << endl;
+	cout << "Othello_NE_CLI" << endl;
 
     const size_t inputSize = 128;
     const std::vector<size_t> nnSize = { 128, 1 };

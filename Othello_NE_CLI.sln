@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Othello_NNGA_CLI", "Othello_NNGA_CLI.vcxproj", "{8C8F4047-D960-48AD-9341-7A3D3EA1335F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Othello_NE_CLI", "Othello_NE_CLI.vcxproj", "{8C8F4047-D960-48AD-9341-7A3D3EA1335F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Othello_NNGA_CLI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Othello\AgentStrategy\ManualStrategy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -51,13 +48,16 @@
     <ClCompile Include="GA\GeneticAlgorithm.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="NNGA\ParseFunctions.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Othello\AgentStrategy\NNBot.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Othello\View\OthelloExceptionView.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="NE\ParseFunctions.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Othello_NE_CLI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,9 +111,6 @@
     <ClInclude Include="GA\GeneticAlgorithm.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="NNGA\ParseFunctions.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Othello\AgentStrategy\NNBot.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -121,6 +118,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Othello\View\OthelloExceptionView.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="NE\ParseFunctions.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
