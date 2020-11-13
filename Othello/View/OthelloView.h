@@ -1,8 +1,8 @@
 #pragma once
-#include "Othello/Model/Othello.h"
+#include "OthelloViewInterface.h"
 
 
-class OthelloView {
+class OthelloView : public OthelloViewInterface {
 private:
     std::map<otl::Team, std::string> _teamNames;
 
@@ -15,9 +15,9 @@ public:
     static std::string getStoneStr(const otl::Team& team);
     static void drawBoard(const otl::Othello& othello);
 
-    static void drawAnswer(const otl::Point& pos);
-    static void drawException(std::string result);
+    void drawAnswer(const otl::Point& pos) override;
+    void drawException(std::string result) override;
 
     void drawTeamScore(const otl::Team& team, const int& score);
-    void drawOthello(const otl::Othello& othello);
+    void drawOthello(const otl::Othello& othello) override;
 };

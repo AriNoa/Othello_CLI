@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <random>
 #include "Othello/Controller/OthelloController.h"
+#include "Othello/View/OthelloView.h"
+#include "Othello/View/OthelloExceptionView.h"
 #include "Othello/AgentStrategy/NNBot.h"
 #include "Othello/AgentStrategy/ManualStrategy.h"
 #include "GA/GeneticAlgorithm.h"
@@ -60,6 +62,8 @@ int main() {
 		);
 	}
 
+	std::shared_ptr<OthelloViewInterface> exceptionView = make_shared<OthelloExceptionView>();
+
 	for (size_t generation = 0; generation < 100; generation++) {
 		vector<shared_ptr<IAgentStrategy>> bots;
 		for (const auto& nn : nns) {
@@ -77,25 +81,12 @@ int main() {
 					{ Team::Second, bots[eIndex] }
 				};
 
-				Othello othello;
+				OthelloController controller(agents, exceptionView);
 
-				while (true) {
-					const Team activeTeam = othello.getActiveTeam();
-					if (activeTeam == Team::None) break;
+				auto othello_opt = controller.run();
+				if (!othello_opt) return 1;
 
-					const Point putPos = agents[activeTeam]->answer(othello);
-
-					auto putResult = othello.putStone(putPos);
-
-					if (holds_alternative<string>(putResult)) {
-						cout << endl << putPos.x << ", " << putPos.y;
-						cout << endl << get<string>(putResult) << endl;
-						//return 1;
-						break;
-					}
-				}
-
-				const auto score = othello.getScore();
+				const auto score = othello_opt.value().getScore();
 				const int& fScore = score.at(Team::First);
 				const int& sScore = score.at(Team::Second);
 
@@ -130,7 +121,13 @@ int main() {
 		{ Team::Second, nnAgent }
 	};
 
-	OthelloController controller(agents);
+	std::shared_ptr<OthelloViewInterface> view = make_shared<OthelloView>(
+		map<otl::Team, std::string>({
+			{ Team::First,  "Player" },
+			{ Team::Second, "NN_Agent" }
+		})
+	);
+	OthelloController controller(agents, view);
 
 	controller.run();
 
