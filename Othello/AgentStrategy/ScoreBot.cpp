@@ -13,7 +13,7 @@ otl::Point ScoreBot::answer(const otl::Othello& othello) {
 
 			if (!othello.canPutStone(pos)) continue;
 
-			const int& score = scoreBoard[x][y];
+			const int& score = scoreBoard[y][x];
 			if (score > maxScore) {
 				maxScore = score;
 				canPutPoints.clear();
