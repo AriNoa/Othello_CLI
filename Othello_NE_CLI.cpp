@@ -6,6 +6,8 @@
 #include "Othello/View/OthelloExceptionView.h"
 #include "Othello/AgentStrategy/NNBot.h"
 #include "Othello/AgentStrategy/ManualStrategy.h"
+#include "Othello/AgentStrategy/RandomBot.h"
+#include "Othello/AgentStrategy/ScoreBot.h"
 #include "GA/GeneticAlgorithm.h"
 #include "NE/ParseFunctions.h"
 
@@ -34,11 +36,30 @@ std::vector<double> createGenome(
 	return genome;
 }
 
+otl::Team getWiener(const std::map<otl::Team, int>& score) {
+	using namespace otl;
+	const int& fScore = score.at(Team::First);
+	const int& sScore = score.at(Team::Second);
+
+	if (fScore > sScore) return Team::First;
+	if (fScore < sScore) return Team::Second;
+	
+	return Team::None;
+}
+
+
 int main() {
     using namespace std;
     using namespace otl;
 
 	cout << "Othello_NE_CLI" << endl;
+
+	const vector<shared_ptr<IAgentStrategy>> enemyAgents = {
+		make_shared<RandomBot>(),
+		make_shared<RandomBot>(),
+		make_shared<ScoreBot>(),
+		make_shared<ScoreBot>(),
+	};
 
     const size_t inputSize = 128;
     const std::vector<size_t> nnSize = { 128, 1 };
@@ -72,13 +93,13 @@ int main() {
 
 		vector<int> evals(bots.size(), 0);
 
-		for (size_t bIndex = 0; bIndex < bots.size(); bIndex++) {
-			for (size_t eIndex = 0; eIndex < bots.size(); eIndex++) {
-				if (bIndex == eIndex) continue;
+		for (size_t fIndex = 0; fIndex < bots.size(); fIndex++) {
+			for (size_t sIndex = 0; sIndex < bots.size(); sIndex++) {
+				if (fIndex == sIndex) continue;
 
 				map<Team, shared_ptr<IAgentStrategy>> agents = {
-					{ Team::First,  bots[bIndex] },
-					{ Team::Second, bots[eIndex] }
+					{ Team::First,  bots[fIndex] },
+					{ Team::Second, bots[sIndex] }
 				};
 
 				OthelloController controller(agents, exceptionView);
@@ -86,19 +107,32 @@ int main() {
 				auto othello_opt = controller.run();
 				if (!othello_opt) return 1;
 
-				const auto score = othello_opt.value().getScore();
-				const int& fScore = score.at(Team::First);
-				const int& sScore = score.at(Team::Second);
+				const Othello othello = othello_opt.value();
+				const Team winner = getWiener(othello.getScore());
 
-				if (fScore == sScore) continue;
+				if (winner == Team::First)	evals[fIndex]++;
+				if (winner == Team::Second) evals[sIndex]++;
+			}
 
-				if (fScore > sScore) {
-					evals[bIndex]++;
-				} else {
-					evals[eIndex]++;
-				}
+			for (auto enemy : enemyAgents) {
+				map<Team, shared_ptr<IAgentStrategy>> agents = {
+					{ Team::First,  bots[fIndex] },
+					{ Team::Second, enemy }
+				};
+
+				OthelloController controller(agents, exceptionView);
+
+				auto othello_opt = controller.run();
+				if (!othello_opt) return 1;
+
+				const Othello othello = othello_opt.value();
+				const Team winner = getWiener(othello.getScore());
+
+				if (winner == Team::First)	evals[fIndex] += 2;
+				if (winner == Team::Second) evals[fIndex] -= 2;
 			}
 		}
+
 
 		if (generation % 1 == 0) {
 			cout << generation << "世代: " << setprecision(4) << evals.back() << endl;
