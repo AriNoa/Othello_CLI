@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <iomanip>
 #include <random>
+#include <fstream>
 #include "Othello/Controller/OthelloController.h"
 #include "Othello/View/OthelloView.h"
 #include "Othello/View/OthelloExceptionView.h"
@@ -54,13 +55,15 @@ int main() {
 
 	cout << "Othello_NE_CLI" << endl;
 
-	const vector<shared_ptr<IAgentStrategy>> enemyAgents = {
-		make_shared<RandomBot>(),
-		make_shared<RandomBot>(),
-		make_shared<ScoreBot>(),
+	vector<shared_ptr<IAgentStrategy>> randomBots(10, make_shared<RandomBot>());
+	vector<shared_ptr<IAgentStrategy>> enemyAgents = {
 		make_shared<ScoreBot>(),
 	};
-
+	
+	enemyAgents.insert(
+		enemyAgents.cend(), randomBots.begin(), randomBots.end()
+	);
+			
     const size_t inputSize = 128;
     const std::vector<size_t> nnSize = { 128, 1 };
 
@@ -133,17 +136,20 @@ int main() {
 			}
 		}
 
-
-		if (generation % 1 == 0) {
-			cout << generation << "世代: " << setprecision(4) << evals.back() << endl;
-		}
-
 		nns.clear();
 		genomes = gg.evolution(evals);
 		for (const auto& genome : genomes) {
 			nns.push_back(
 				toNN(*genome, inputSize, nnSize)
 			);
+		}
+
+		if (generation % 1 == 0) {
+			cout << generation << "世代: " << setprecision(4) << evals.back() << endl;
+
+			std::ofstream ofs("NN.txt");
+			if (!ofs) return 1;
+			ofs << toText(*genomes.back());
 		}
 	}
 
