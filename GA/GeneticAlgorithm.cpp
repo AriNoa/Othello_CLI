@@ -102,9 +102,10 @@ GeneticAlgorithm::Genome GeneticAlgorithm::crossing(const Genome& first, const G
 
 		const double& A = first[i];
 		const double& B = second[i];
+		const double x = (B - A) * random + B;
 
 		newGenome.push_back(
-			(B - A) * random + B
+			2.0 / (1.0 + exp(-2.0 * x)) - 1.0
 		);
 	}
 
