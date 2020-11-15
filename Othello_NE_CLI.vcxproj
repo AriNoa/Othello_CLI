@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GA\GeneticAlgorithm.cpp" />
+    <ClCompile Include="Othello\AgentStrategy\LeftUpBot.cpp" />
     <ClCompile Include="Othello\View\OthelloExceptionView.cpp" />
     <ClCompile Include="Othello\AgentStrategy\NNBot.cpp" />
     <ClCompile Include="NE\ParseFunctions.cpp" />
@@ -169,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GA\GeneticAlgorithm.h" />
+    <ClInclude Include="Othello\AgentStrategy\LeftUpBot.h" />
     <ClInclude Include="Othello\View\OthelloExceptionView.h" />
     <ClInclude Include="Othello\View\OthelloViewInterface.h" />
     <ClInclude Include="Othello\AgentStrategy\NNBot.h" />
