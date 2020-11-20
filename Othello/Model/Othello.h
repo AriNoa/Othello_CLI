@@ -48,6 +48,10 @@ namespace otl {
 
 	public:
 		Othello();
+		Othello(
+			const std::vector<std::vector<Team>>& board,
+			const Team& activeTeam
+		);
 
 		std::variant<
 			std::pair<std::vector<std::vector<Team>>, Team>,

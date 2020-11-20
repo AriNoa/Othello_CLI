@@ -7,6 +7,25 @@ namespace otl {
 		_board = initialBoard;
 	}
 
+	Othello::Othello(const std::vector<std::vector<Team>>& board, const Team& activeTeam) {
+		_board = board;
+		_activeTeam = activeTeam;
+		_score = {
+			{Team::First,	0},
+			{Team::Second,	0},
+		};
+
+		for (size_t y = 0; y < height; y++) {
+			for (size_t x = 0; x < width; x++) {
+				const Team& team = _board[y][x];
+
+				if (team != Team::None) continue;
+
+				_score[team]++;
+			}
+		}
+	}
+
 	std::variant<
 		std::pair<std::vector<std::vector<Team>>, Team>,
 		std::string
