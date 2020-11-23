@@ -9,6 +9,7 @@
 #include "Othello/AgentStrategy/ManualStrategy.h"
 #include "Othello/AgentStrategy/RandomBot.h"
 #include "Othello/AgentStrategy/ScoreBot.h"
+#include "Othello/AgentStrategy/LeftUpBot.h"
 #include "GA/GeneticAlgorithm.h"
 #include "NE/ParseFunctions.h"
 
@@ -55,17 +56,18 @@ int main() {
 
 	cout << "Othello_NE_CLI" << endl;
 
-	vector<shared_ptr<IAgentStrategy>> randomBots(10, make_shared<RandomBot>());
+	vector<shared_ptr<IAgentStrategy>> randomBots(4, make_shared<RandomBot>());
 	vector<shared_ptr<IAgentStrategy>> enemyAgents = {
 		make_shared<ScoreBot>(),
+		make_shared<LeftUpBot>()
 	};
-	
+
 	enemyAgents.insert(
 		enemyAgents.cend(), randomBots.begin(), randomBots.end()
 	);
 			
-    const size_t inputSize = 128;
-    const std::vector<size_t> nnSize = { 128, 1 };
+    const size_t inputSize = 6;
+    const std::vector<size_t> nnSize = { 8, 1 };
 
 	std::vector<std::shared_ptr<std::vector<double>>> genomes;
 
@@ -132,7 +134,6 @@ int main() {
 				const Team winner = getWiener(othello.getScore());
 
 				if (winner == Team::First)	evals[fIndex] += 2;
-				if (winner == Team::Second) evals[fIndex] -= 2;
 			}
 		}
 
