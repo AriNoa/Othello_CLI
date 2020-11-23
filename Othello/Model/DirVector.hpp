@@ -15,4 +15,12 @@ namespace otl {
 			assert(dx != 0 || dy != 0);
 		}
 	};
+
+	inline std::vector<DirVector> createDirVectors() {
+		return {
+			{ -1, -1 },	{ 0, -1 },	{ 1, -1 },
+			{ -1, 0  },				{ 1, 0  },
+			{ -1, 1  },	{ 0, 1  },	{ 1, 1  },
+		};
+	}
 }

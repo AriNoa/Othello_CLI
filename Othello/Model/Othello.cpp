@@ -72,11 +72,7 @@ namespace otl {
 	}
 
 	bool Othello::canTurnOverStone(const Point& point) const {
-		const std::vector<DirVector> dirVecs = {
-			{ -1, -1 },	{ 0, -1 },	{ 1, -1 },
-			{ -1, 0  },				{ 1, 0  },
-			{ -1, 1  },	{ 0, 1  },	{ 1, 1  },
-		};
+		const std::vector<DirVector> dirVecs = otl::createDirVectors();
 
 		for (int i = 0; i < 8; i++) {
 			if (canTurnOverLine(point, dirVecs[i])) return true;
@@ -110,11 +106,7 @@ namespace otl {
 		_board[updatePos.y][updatePos.x] = team;
 		_score[team] += 1;
 
-		const std::vector<DirVector> dirVecs = {
-			{ -1, -1 },	{ 0, -1 },	{ 1, -1 },
-			{ -1, 0  },				{ 1, 0  },
-			{ -1, 1  },	{ 0, 1  },	{ 1, 1  },
-		};
+		const std::vector<DirVector> dirVecs = otl::createDirVectors();
 
 		for (int i = 0; i < 8; i++) {
 			const DirVector& dirVec = dirVecs[i];
