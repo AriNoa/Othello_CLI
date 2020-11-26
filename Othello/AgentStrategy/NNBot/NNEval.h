@@ -1,5 +1,5 @@
 #pragma once
-#include "IAgentStrategy.h"
+#include "Othello/Model/Othello.h"
 #include "NN/NeuralNetwork.h"
 
 
@@ -67,14 +67,3 @@ namespace nne {
 		double evaluate(const otl::Point& putPos);
 	};
 }
-
-class NNBot : public IAgentStrategy {
-private:
-	NeuralNetwork _nn;
-
-public:
-	NNBot(const NeuralNetwork& nn);
-
-	virtual std::string getName() const { return "NNBot"; }
-	virtual otl::Point answer(const otl::Othello& othello) override;
-};

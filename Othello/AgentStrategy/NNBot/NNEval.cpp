@@ -1,4 +1,4 @@
-#include "NNBot.h"
+#include "NNEval.h"
 
 
 nne::LineEvaluation::LineEvaluation(
@@ -19,7 +19,7 @@ std::pair<double, double> nne::LineEvaluation::getInput(const otl::Team& team) c
 std::vector<double> nne::LineEvaluation::getInputs(const Line& line) const {
 	std::vector<double> inputs;
 
-	for (size_t i = 0; i<line.length; i++) {
+	for (size_t i = 0; i < line.length; i++) {
 		const otl::Point pos = line.corner + line.dir * (int)i;
 
 		const auto input = getInput(_board[pos.y][pos.x]);
@@ -46,8 +46,8 @@ std::vector<nne::Line> nne::BoardEvaluation::initLines(const size_t& length) {
 
 	const size_t XB = 0;
 	const size_t YB = 0;
-	const size_t XE = Othello::width-1;
-	const size_t YE = Othello::height-1;
+	const size_t XE = Othello::width - 1;
+	const size_t YE = Othello::height - 1;
 
 	const vector<pair<Point, DirVector>> vecs = {
 		{{XB, YB}, { 1,  1}},
@@ -94,13 +94,13 @@ nne::BoardEvaluation::Board<std::vector<size_t>> nne::BoardEvaluation::initLineI
 }
 
 nne::BoardEvaluation::BoardEvaluation(
-	const std::vector<double>& defaultLineEvals, 
+	const std::vector<double>& defaultLineEvals,
 	const NeuralNetwork& nn,
 	const otl::Othello& othello
 )	: _defaultLineEvals(defaultLineEvals)
 	, _nn(nn)
-	, _othello(othello) 
-	, _defaultEvalSum(calculateEvalSum(_defaultLineEvals)){
+	, _othello(othello)
+	, _defaultEvalSum(calculateEvalSum(_defaultLineEvals)) {
 	_evalSum = _defaultEvalSum;
 	_linesIgnore = std::vector<bool>(lines.size(), false);
 }
@@ -149,45 +149,4 @@ double nne::BoardEvaluation::evaluate(const otl::Point& putPos) {
 	}
 
 	return _evalSum;
-}
-
-
-NNBot::NNBot(const NeuralNetwork& nn) {
-	_nn = nn;
-}
-
-otl::Point NNBot::answer(const otl::Othello& othello) {
-	using namespace std;
-	using namespace otl;
-	using namespace nne;
-
-	const Team myTeam = othello.getActiveTeam();
-
-	vector<double> defaultLineEvals;
-	LineEvaluation lineEval(_nn, myTeam, othello.getBoard());
-	for (const auto& line : BoardEvaluation::lines) {
-		defaultLineEvals.push_back(lineEval.evaluate(line));
-	}
-
-	BoardEvaluation boardEval(defaultLineEvals, _nn, othello);
-
-	double max = -1;
-	Point maxPos;
-
-	for (int y = 0; y < Othello::height; y++) {
-		for (int x = 0; x < Othello::width; x++) {
-			const Point pos = { x, y };
-
-			if (!othello.canPutStone(pos)) continue;
-
-			const double eval = boardEval.evaluate(pos);
-
-			if (eval > max) {
-				max = eval;
-				maxPos = pos;
-			}
-		}
-	}
-
-	return maxPos;
 }

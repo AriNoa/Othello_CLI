@@ -145,9 +145,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GA\GeneticAlgorithm.cpp" />
+    <ClCompile Include="Othello\AgentStrategy\NNBot\NNEval.cpp" />
     <ClCompile Include="Othello\AgentStrategy\LeftUpBot.cpp" />
     <ClCompile Include="Othello\View\OthelloExceptionView.cpp" />
-    <ClCompile Include="Othello\AgentStrategy\NNBot.cpp" />
+    <ClCompile Include="Othello\AgentStrategy\NNBot\NNBot.cpp" />
     <ClCompile Include="NE\ParseFunctions.cpp" />
     <ClCompile Include="NN\NeuralNetwork.cpp" />
     <ClCompile Include="NN\Neuron.cpp" />
@@ -170,10 +171,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GA\GeneticAlgorithm.h" />
+    <ClInclude Include="Othello\AgentStrategy\NNBot\NNEval.h" />
     <ClInclude Include="Othello\AgentStrategy\LeftUpBot.h" />
     <ClInclude Include="Othello\View\OthelloExceptionView.h" />
     <ClInclude Include="Othello\View\OthelloViewInterface.h" />
-    <ClInclude Include="Othello\AgentStrategy\NNBot.h" />
+    <ClInclude Include="Othello\AgentStrategy\NNBot\NNBot.h" />
     <ClInclude Include="NE\ParseFunctions.h" />
     <ClInclude Include="NN\NeuralNetwork.h" />
     <ClInclude Include="NN\Neuron.h" />

@@ -5,7 +5,7 @@
 #include "Othello/Controller/OthelloController.h"
 #include "Othello/View/OthelloView.h"
 #include "Othello/View/OthelloExceptionView.h"
-#include "Othello/AgentStrategy/NNBot.h"
+#include "Othello/AgentStrategy/NNBot/NNBot.h"
 #include "Othello/AgentStrategy/ManualStrategy.h"
 #include "Othello/AgentStrategy/RandomBot.h"
 #include "Othello/AgentStrategy/ScoreBot.h"
