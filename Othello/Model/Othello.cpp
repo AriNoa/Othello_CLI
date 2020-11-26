@@ -126,4 +126,12 @@ namespace otl {
 			}
 		}
 	}
+
+	void Othello::setBoard(const std::vector<std::vector<Team>>& board) {
+		_board = board;
+	}
+
+	void Othello::setActiveTeam(const Team& activeTeam) {
+		_activeTeam = activeTeam;
+	}
 };

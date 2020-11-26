@@ -68,5 +68,8 @@ namespace otl {
 		bool canPutStones() const;
 
 		void updateBoard(const Point& updatePos, const Team& team);
+
+		void setBoard(const std::vector<std::vector<Team>>& board);
+		void setActiveTeam(const Team& activeTeam);
 	};
 }
