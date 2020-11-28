@@ -25,6 +25,7 @@ NeuralNetwork toNN(const std::vector<double>& genome, const size_t& inputSize, c
 		}
 
 		nn.push_back(layer);
+		frontSize = layer.size();
 	}
 
 	auto activation = [](const double& x) -> double { return 1.0 / (1.0 + std::exp(-x)); };

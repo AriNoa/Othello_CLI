@@ -33,6 +33,8 @@ std::vector<double> createGenome(
 
 			genome.push_back(rand(mt));
 		}
+
+		frontSize = nnSize[layerIndex];
 	}
 
 	return genome;
