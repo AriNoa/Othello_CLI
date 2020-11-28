@@ -3,13 +3,13 @@
 #include "AlphaBetaSearch.h"
 
 
-class NNBot : public IAgentStrategy {
+class NEBot : public IAgentStrategy {
 private:
 	NeuralNetwork _nn;
 
 public:
-	NNBot(const NeuralNetwork& nn);
+	NEBot(const NeuralNetwork& nn);
 
-	virtual std::string getName() const { return "NNBot"; }
+	virtual std::string getName() const { return "NEBot"; }
 	virtual otl::Point answer(const otl::Othello& othello) override;
 };

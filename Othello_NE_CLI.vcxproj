@@ -144,6 +144,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Othello\AgentStrategy\NNBot\NEBot.cpp" />
+    <ClCompile Include="Othello\AgentStrategy\NNBot\AlphaBetaSearch.cpp" />
     <ClCompile Include="GA\GeneticAlgorithm.cpp" />
     <ClCompile Include="Othello\AgentStrategy\NNBot\NNEval.cpp" />
     <ClCompile Include="Othello\AgentStrategy\LeftUpBot.cpp" />
@@ -170,6 +172,8 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Othello\AgentStrategy\NNBot\NEBot.h" />
+    <ClInclude Include="Othello\AgentStrategy\NNBot\AlphaBetaSearch.h" />
     <ClInclude Include="GA\GeneticAlgorithm.h" />
     <ClInclude Include="Othello\AgentStrategy\NNBot\NNEval.h" />
     <ClInclude Include="Othello\AgentStrategy\LeftUpBot.h" />

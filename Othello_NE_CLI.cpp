@@ -6,6 +6,7 @@
 #include "Othello/View/OthelloView.h"
 #include "Othello/View/OthelloExceptionView.h"
 #include "Othello/AgentStrategy/NNBot/NNBot.h"
+#include "Othello/AgentStrategy/NNBot/NEBot.h"
 #include "Othello/AgentStrategy/ManualStrategy.h"
 #include "Othello/AgentStrategy/RandomBot.h"
 #include "Othello/AgentStrategy/ScoreBot.h"
@@ -95,7 +96,7 @@ int main() {
 	for (size_t generation = 0; generation < 100; generation++) {
 		vector<shared_ptr<IAgentStrategy>> bots;
 		for (const auto& nn : nns) {
-			bots.push_back(make_shared<NNBot>(nn));
+			bots.push_back(make_shared<NEBot>(nn));
 		}
 
 		vector<int> evals(bots.size(), 0);
