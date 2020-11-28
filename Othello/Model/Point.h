@@ -6,60 +6,64 @@ namespace otl {
 		int x;
 		int y;
 
-        Point operator +() const
+        constexpr Point operator +() const
         {
             return *this;
         }
 
-        Point operator -() const
+        constexpr Point operator -() const
         {
             return{ -x, -y };
         }
 
-        Point operator +(const Point& other) const
+        constexpr Point operator +(const Point& other) const
         {
             return{ x + other.x, y + other.y };
         }
 
-        Point operator -(const Point& other) const
+        constexpr Point operator -(const Point& other) const
         {
             return{ x - other.x, y - other.y };
         }
 
-        Point operator *(int s) const {
+        constexpr Point operator *(int s) const {
             return{ x * s, y * s };
         }
 
-        Point operator /(int s) const {
+        constexpr Point operator /(int s) const {
             return{ x / s, y / s };
         }
 
-        Point& operator +=(const Point& other)
+        constexpr Point& operator +=(const Point& other)
         {
             x += other.x;
             y += other.y;
             return *this;
         }
 
-        Point& operator -=(const Point& other)
+        constexpr Point& operator -=(const Point& other)
         {
             x -= other.x;
             y -= other.y;
             return *this;
         }
 
-        Point& operator *=(int s)
+        constexpr Point& operator *=(int s)
         {
             x *= s;
             y *= s;
             return *this;
         }
 
-        Point& operator /=(int s)
+        constexpr Point& operator /=(int s)
         {
             x /= s;
             y /= s;
             return *this;
+        }
+
+        constexpr bool operator ==(const Point& other) const {
+            return x == other.x && other.x;
         }
 	};
 }
