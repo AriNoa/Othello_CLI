@@ -12,6 +12,14 @@ otl::Point NEBot::answer(const otl::Othello& othello) {
 
 	const Team myTeam = othello.getActiveTeam();
 
+	const auto& score = othello.getScore();
+	const int stones = score.at(Team::First) + score.at(Team::Second);
+
+	if (64 - fullSearchCount <= stones) {
+		AlphaBetaSearch ab(_nn, myTeam);
+		return ab.fullSearch(othello);
+	}
+
 	vector<double> defaultLineEvals;
 	LineEvaluation lineEval(_nn, myTeam, othello.getBoard());
 	for (const auto& line : BoardEvaluation::lines) {

@@ -4,6 +4,9 @@
 
 
 class NEBot : public IAgentStrategy {
+public:
+	static constexpr int fullSearchCount = 6;
+
 private:
 	NeuralNetwork _nn;
 

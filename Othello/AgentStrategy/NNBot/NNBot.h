@@ -4,6 +4,10 @@
 
 
 class NNBot : public IAgentStrategy {
+public:
+	static constexpr int searchDepth = 3;
+	static constexpr int fullSearchCount = 12;
+
 private:
 	NeuralNetwork _nn;
 
