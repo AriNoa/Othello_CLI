@@ -62,6 +62,8 @@ namespace nne {
 			const otl::Othello& othello
 		);
 
+		constexpr const double& getEvalSum() const { return _evalSum; }
+
 		void pointEval(const otl::Point& pos, const LineEvaluation& lineEval);
 
 		double evaluate(const otl::Point& putPos);
