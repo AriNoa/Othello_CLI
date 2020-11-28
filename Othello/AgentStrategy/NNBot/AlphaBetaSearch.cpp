@@ -27,10 +27,10 @@ double AlphaBetaSearch::endEval(
 	using namespace otl;
 	using namespace nne;
 
-	const Team myTeam = othello.getActiveTeam();
+	const Team team = othello.getActiveTeam();
 
 	vector<double> defaultLineEvals;
-	LineEvaluation lineEval(_nn, myTeam, othello.getBoard());
+	LineEvaluation lineEval(_nn, team, othello.getBoard());
 	for (const auto& line : BoardEvaluation::lines) {
 		defaultLineEvals.push_back(lineEval.evaluate(line));
 	}
@@ -101,14 +101,89 @@ otl::Point AlphaBetaSearch::search(const otl::Othello& othello, const int& depth
 	double max = DBL_MIN;
 	Point putPos = movables.front();
 
-	assert(!movables.empty());
-
 	for (const auto& pos : movables) {
 		Othello copyOthello = othello;
 		copyOthello.updateBoard(pos, team);
 		copyOthello.setActiveTeam(nextTeam);
 
 		const double e = alphaBetaEvaluate(copyOthello, depth - 1, DBL_MIN, DBL_MAX);
+
+		if (e > max) {
+			max = e;
+			putPos = pos;
+		}
+	}
+
+	return putPos;
+}
+
+int AlphaBetaSearch::fullEval(const otl::Othello& othello) {
+	const auto& score = othello.getScore();
+	const auto& myScore = score.at(_myTeam);
+	const auto& enemyScore = score.at(getEnemyTeam(_myTeam));
+
+	return myScore - enemyScore;
+}
+
+int AlphaBetaSearch::alphaBetaFullEvaluate(
+	const otl::Othello& othello,
+	const bool& passed,
+	int a,
+	int b
+) {
+	using namespace std;
+	using namespace otl;
+	using namespace nne;
+
+	const Team team = othello.getActiveTeam();
+	const Team nextTeam = getEnemyTeam(team);
+	auto movables = getMovables(othello);
+
+	if (movables.empty()) {
+		if (passed) return fullEval(othello);
+
+		Othello copyOthello = othello;
+		copyOthello.setActiveTeam(nextTeam);
+		alphaBetaFullEvaluate(copyOthello, true, a, b);
+	}
+
+	for (const auto& pos : movables) {
+		Othello copyOthello = othello;
+		copyOthello.updateBoard(pos, team);
+		copyOthello.setActiveTeam(nextTeam);
+
+		const int e = alphaBetaFullEvaluate(copyOthello, false, a, b);
+
+		if (team == _myTeam) {
+			a = max(a, e);
+			if (a >= b) return a;
+		} else {
+			b = min(b, e);
+			if (b <= a) return b;
+		}
+	}
+
+	return team == _myTeam ? a : b;
+}
+
+otl::Point AlphaBetaSearch::fullSearch(const otl::Othello& othello) {
+	using namespace std;
+	using namespace otl;
+	using namespace nne;
+
+	const Team team = othello.getActiveTeam();
+	const Team nextTeam = getEnemyTeam(team);
+	auto movables = getMovables(othello);
+
+	int max = INT_MIN;
+	Point putPos = movables.front();
+
+	for (const auto& pos : movables) {
+		Othello copyOthello = othello;
+		copyOthello.updateBoard(pos, team);
+		copyOthello.setActiveTeam(nextTeam);
+
+		const int e = alphaBetaFullEvaluate(copyOthello, false, INT_MIN, INT_MAX);
 
 		if (e > max) {
 			max = e;

@@ -32,4 +32,15 @@ public:
 		const otl::Othello& othello,
 		const int& depth
 	);
+
+	int fullEval(const otl::Othello& othello);
+
+	int alphaBetaFullEvaluate(
+		const otl::Othello& othello,
+		const bool& passed,
+		int a,
+		int b
+	);
+
+	otl::Point fullSearch(const otl::Othello& othello);
 };
