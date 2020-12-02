@@ -59,6 +59,29 @@ int main() {
 
 	cout << "Othello_NE_CLI" << endl;
 
+	//ファイルを読み込み一回のみ対戦する
+	//余裕があるときに分離する
+	{
+		shared_ptr<IAgentStrategy> nnAgent(new NNBot("NN.txt"));
+		shared_ptr<IAgentStrategy> manual(new ManualStrategy());
+
+		map<Team, shared_ptr<IAgentStrategy>> agents = {
+			{ Team::First,  nnAgent },
+			{ Team::Second, manual }
+		};
+
+		std::shared_ptr<OthelloViewInterface> view = make_shared<OthelloView>(
+			map<otl::Team, std::string>({
+				{ Team::First,  "NN_Agent" },
+				{ Team::Second, "Player" }
+				})
+			);
+		OthelloController controller(agents, view);
+
+		controller.run();
+	}
+	
+
 	vector<shared_ptr<IAgentStrategy>> randomBots(4, make_shared<RandomBot>());
 	vector<shared_ptr<IAgentStrategy>> enemyAgents = {
 		make_shared<ScoreBot>(),
@@ -93,7 +116,7 @@ int main() {
 
 	std::shared_ptr<OthelloViewInterface> exceptionView = make_shared<OthelloExceptionView>();
 
-	for (size_t generation = 0; generation < 100; generation++) {
+	for (size_t generation = 0; generation < 1000; generation++) {
 		vector<shared_ptr<IAgentStrategy>> bots;
 		for (const auto& nn : nns) {
 			bots.push_back(make_shared<NEBot>(nn));

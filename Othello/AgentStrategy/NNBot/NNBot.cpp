@@ -6,6 +6,10 @@ NNBot::NNBot(const NeuralNetwork& nn) {
 	_nn = nn;
 }
 
+NNBot::NNBot(const std::string& filePath)
+	: _nn(toNN(toGenome(readAll(filePath)), inputSize, nnSize)) {
+}
+
 otl::Point NNBot::answer(const otl::Othello& othello) {
 	using namespace std;
 	using namespace otl;
