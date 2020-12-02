@@ -14,13 +14,13 @@ namespace nne {
 	private:
 		const NeuralNetwork& _nn;
 		const otl::Team& _myTeam;
-		const std::vector<std::vector<otl::Team>> _board;
+		const otl::Othello::BoardType _board;
 
 	public:
 		LineEvaluation(
 			const NeuralNetwork& nn,
 			const otl::Team& myTeam,
-			const std::vector<std::vector<otl::Team>> board
+			const otl::Othello::BoardType& board
 		);
 
 		std::pair<double, double> getInput(const otl::Team& team) const;

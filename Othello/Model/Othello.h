@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <vector>
 #include <map>
 #include <utility>
@@ -15,10 +16,13 @@ namespace otl {
 		static constexpr int width = 8;
 		static constexpr int height = 8;
 
+		using BoardType = std::array<std::array<otl::Team, width>, height>;
+
 #define N Team::None
 #define F Team::First
 #define S Team::Second
-		static inline const std::vector<std::vector<Team>> initialBoard = {
+		static inline const BoardType initialBoard = {
+			std::array<otl::Team, width>
 			{N, N, N, N, N, N, N, N},
 			{N, N, N, N, N, N, N, N},
 			{N, N, N, N, N, N, N, N},
@@ -39,7 +43,7 @@ namespace otl {
 		}
 
 	private:
-		std::vector<std::vector<Team>> _board;
+		BoardType _board;
 		Team _activeTeam = Team::First;
 		std::map<Team, int> _score = {
 			{Team::First,	2},
@@ -49,16 +53,16 @@ namespace otl {
 	public:
 		Othello();
 		Othello(
-			const std::vector<std::vector<Team>>& board,
+			const BoardType& board,
 			const Team& activeTeam
 		);
 
 		std::variant<
-			std::pair<std::vector<std::vector<Team>>, Team>,
+			std::pair<BoardType, Team>,
 			std::string
 		> putStone(const Point& point);
 
-		inline const std::vector<std::vector<Team>>& getBoard() const { return _board; }
+		inline const BoardType& getBoard() const { return _board; }
 		constexpr const Team& getActiveTeam() const { return _activeTeam; }
 		inline const std::map<Team, int>& getScore() const { return _score; }
 
@@ -69,7 +73,7 @@ namespace otl {
 
 		void updateBoard(const Point& updatePos, const Team& team);
 
-		void setBoard(const std::vector<std::vector<Team>>& board);
+		void setBoard(const BoardType& board);
 		void setActiveTeam(const Team& activeTeam);
 	};
 }

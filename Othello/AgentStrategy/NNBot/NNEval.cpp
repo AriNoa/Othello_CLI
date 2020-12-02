@@ -4,7 +4,7 @@
 nne::LineEvaluation::LineEvaluation(
 	const NeuralNetwork& nn,
 	const otl::Team& myTeam,
-	const std::vector<std::vector<otl::Team>> board
+	const otl::Othello::BoardType& board
 )	: _nn(nn)
 	, _myTeam(myTeam)
 	, _board(board) {
@@ -124,13 +124,13 @@ double nne::BoardEvaluation::evaluate(const otl::Point& putPos) {
 	_evalSum = _defaultEvalSum;
 	_linesIgnore = std::vector<bool>(lines.size(), false);
 
-	const vector<DirVector> dirVecs = createDirVectors();
-	const vector<vector<Team>>& board = _othello.getBoard();
+	const auto dirVecs = createDirVectors();
+	const Othello::BoardType& board = _othello.getBoard();
 	const Team& myTeam = _othello.getActiveTeam();
 
 	Othello copyOthello = _othello;
 	copyOthello.putStone(putPos);
-	const vector<vector<Team>>& nextBoard = copyOthello.getBoard();
+	const Othello::BoardType& nextBoard = copyOthello.getBoard();
 
 	const LineEvaluation lineEval(_nn, myTeam, nextBoard);
 

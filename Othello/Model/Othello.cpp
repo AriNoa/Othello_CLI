@@ -7,7 +7,7 @@ namespace otl {
 		_board = initialBoard;
 	}
 
-	Othello::Othello(const std::vector<std::vector<Team>>& board, const Team& activeTeam) {
+	Othello::Othello(const BoardType& board, const Team& activeTeam) {
 		_board = board;
 		_activeTeam = activeTeam;
 		_score = {
@@ -27,7 +27,7 @@ namespace otl {
 	}
 
 	std::variant<
-		std::pair<std::vector<std::vector<Team>>, Team>,
+		std::pair<Othello::BoardType, Team>,
 		std::string
 	> Othello::putStone(const Point& point) {
 		if (!PointIsInBoard(point)) {
@@ -72,7 +72,7 @@ namespace otl {
 	}
 
 	bool Othello::canTurnOverStone(const Point& point) const {
-		const std::vector<DirVector> dirVecs = otl::createDirVectors();
+		const auto dirVecs = otl::createDirVectors();
 
 		for (int i = 0; i < 8; i++) {
 			if (canTurnOverLine(point, dirVecs[i])) return true;
@@ -106,7 +106,7 @@ namespace otl {
 		_board[updatePos.y][updatePos.x] = team;
 		_score[team] += 1;
 
-		const std::vector<DirVector> dirVecs = otl::createDirVectors();
+		const auto dirVecs = otl::createDirVectors();
 
 		for (int i = 0; i < 8; i++) {
 			const DirVector& dirVec = dirVecs[i];
@@ -127,7 +127,7 @@ namespace otl {
 		}
 	}
 
-	void Othello::setBoard(const std::vector<std::vector<Team>>& board) {
+	void Othello::setBoard(const BoardType& board) {
 		_board = board;
 	}
 

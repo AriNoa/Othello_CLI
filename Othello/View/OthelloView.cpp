@@ -53,7 +53,7 @@ void OthelloView::drawBoard(const otl::Othello& othello) {
     using namespace std;
     using namespace otl;
 
-    const vector<std::vector<Team>> board = othello.getBoard();
+    const Othello::BoardType board = othello.getBoard();
 
     cout << ' ';
     for (int x = 0; x < Othello::width; x++) { cout << ' ' << x; }
