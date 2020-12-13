@@ -22,5 +22,5 @@ otl::Point NNBot::answer(const otl::Othello& othello) {
 
 	if (64 - fullSearchCount <= stones) return ab.fullSearch(othello);
 	
-	return ab.search(othello, 3);
+	return ab.search(othello, searchDepth);
 }
