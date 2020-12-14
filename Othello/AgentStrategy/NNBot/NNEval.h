@@ -42,7 +42,7 @@ namespace nne {
 			return sum;
 		}
 
-		static constexpr size_t lineLength = 3;
+		static constexpr size_t lineLength = 8;
 		static inline const std::vector<nne::Line> lines = initLines(lineLength);
 		static inline const Board<std::vector<size_t>> lineIndexBoard = initLineIndexBoard(lines);
 
