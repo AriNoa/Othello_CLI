@@ -7,8 +7,8 @@
 
 class NNBot : public IAgentStrategy {
 public:
-	static constexpr size_t inputSize = 6;
-	static inline const std::vector<size_t> nnSize = { 8, 1 };
+	static constexpr size_t inputSize = 16;
+	static inline const std::vector<size_t> nnSize = { 18, 1 };
 	static std::string readAll(std::string filePath) {
 		std::ifstream ifs(filePath);
 		if (!ifs) throw "Error: file is not opened.";

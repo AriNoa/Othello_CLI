@@ -42,27 +42,34 @@ std::vector<nne::Line> nne::BoardEvaluation::initLines(const size_t& length) {
 	using namespace std;
 	using namespace otl;
 
-	std::vector<nne::Line> lines;
-
-	const size_t XB = 0;
-	const size_t YB = 0;
-	const size_t XE = Othello::width - 1;
-	const size_t YE = Othello::height - 1;
-
-	const vector<pair<Point, DirVector>> vecs = {
-		{{XB, YB}, { 1,  1}},
-		{{XB, YE}, { 1, -1}},
-		{{XE, YB}, {-1,  1}},
-		{{XE, YE}, {-1, -1}},
+	vector<nne::Line> lines;
+	
+	constexpr size_t lineLength = 8;
+	constexpr array<Point, 3> corners = {
+		Point{0, 0},
+		Point{7, 0},
+		Point{7, 7}
+	};
+	constexpr array<DirVector, 6> dirVecs = {
+		DirVector{1, 1},
+		DirVector{1, 0},
+		DirVector{0, 1},
+		DirVector{-1,  1},
+		DirVector{ 0,  1},
+		DirVector{-1,  0}
 	};
 
-	for (const auto& vec : vecs) {
-		const otl::Point& corner = vec.first;
-		const int& dx = vec.second.x;
-		const int& dy = vec.second.y;
-		lines.push_back({ corner, {dx, dy}, length });
-		lines.push_back({ corner, { 0, dy}, length });
-		lines.push_back({ corner, {dx,  0}, length });
+	size_t dirIndex = 0;
+	for (size_t cIndex = 0; cIndex < corners.size(); cIndex++) {
+		const auto& corner = corners[cIndex];
+
+		for (size_t i = 0; i < corners.size() - cIndex; i++) {
+			const auto& dirVec = dirVecs[dirIndex];
+
+			lines.push_back({ corner, dirVec, lineLength });
+
+			dirIndex++;
+		}
 	}
 
 	return lines;

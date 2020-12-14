@@ -61,6 +61,7 @@ int main() {
 
 	//ファイルを読み込み一回のみ対戦する
 	//余裕があるときに分離する
+
 	{
 		shared_ptr<IAgentStrategy> nnAgent(new NNBot("NN.txt"));
 		shared_ptr<IAgentStrategy> manual(new ManualStrategy());
@@ -79,8 +80,9 @@ int main() {
 		OthelloController controller(agents, view);
 
 		controller.run();
+
+		return 0;
 	}
-	
 
 	vector<shared_ptr<IAgentStrategy>> randomBots(4, make_shared<RandomBot>());
 	vector<shared_ptr<IAgentStrategy>> enemyAgents = {
@@ -92,8 +94,8 @@ int main() {
 		enemyAgents.cend(), randomBots.begin(), randomBots.end()
 	);
 			
-    const size_t inputSize = 6;
-    const std::vector<size_t> nnSize = { 8, 1 };
+    const size_t inputSize = 16;
+    const std::vector<size_t> nnSize = { 18, 1 };
 
 	std::vector<std::shared_ptr<std::vector<double>>> genomes;
 
