@@ -22,7 +22,7 @@ public:
 		return str;
 	}
 
-	static constexpr int searchDepth = 8;
+	static constexpr int searchDepth = 5;
 	static constexpr int fullSearchCount = 12;
 
 private:
